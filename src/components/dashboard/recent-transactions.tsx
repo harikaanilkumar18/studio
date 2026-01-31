@@ -40,7 +40,7 @@ export function RecentTransactions({ transactions }: RecentTransactionsProps) {
               <Badge variant="outline">{transaction.category}</Badge>
             </TableCell>
             <TableCell className="text-right">
-              ${transaction.amount.toFixed(2)}
+              ₹{transaction.amount.toFixed(2)}
             </TableCell>
           </TableRow>
         ))}

@@ -140,7 +140,7 @@ export default function TransactionTable({ data }: { data: Transaction[] }) {
                     {new Date(transaction.date).toLocaleDateString("en-CA")}
                   </TableCell>
                   <TableCell className="text-right">
-                    ${transaction.amount.toFixed(2)}
+                    ₹{transaction.amount.toFixed(2)}
                   </TableCell>
                 </TableRow>
               ))

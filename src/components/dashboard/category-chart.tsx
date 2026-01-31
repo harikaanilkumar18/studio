@@ -67,7 +67,7 @@ export function CategoryChart({ transactions }: CategoryChartProps) {
             category="amount"
             index="category"
             valueFormatter={(value) =>
-                `$${new Intl.NumberFormat("en-US").format(value)}`
+                `₹${new Intl.NumberFormat("en-IN").format(value)}`
             }
             colors={["Shopping", "Food", "Travel", "Bills", "Entertainment", "Other"]}
             showLabel={true}
@@ -75,7 +75,7 @@ export function CategoryChart({ transactions }: CategoryChartProps) {
             label={
               <div className="text-center">
                 <p className="text-2xl font-bold">
-                  ${totalAmount.toLocaleString()}
+                  ₹{totalAmount.toLocaleString("en-IN")}
                 </p>
                 <p className="text-xs text-muted-foreground">Total Spent</p>
               </div>

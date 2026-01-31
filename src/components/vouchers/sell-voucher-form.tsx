@@ -68,7 +68,7 @@ export function SellVoucherForm() {
             <FormItem>
               <FormLabel>Voucher Name</FormLabel>
               <FormControl>
-                <Input placeholder="e.g., $50 Amazon Gift Card" {...field} />
+                <Input placeholder="e.g., ₹4000 Amazon Gift Card" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -93,9 +93,9 @@ export function SellVoucherForm() {
             name="originalValue"
             render={({ field }) => (
                 <FormItem>
-                <FormLabel>Original Value ($)</FormLabel>
+                <FormLabel>Original Value (₹)</FormLabel>
                 <FormControl>
-                    <Input type="number" placeholder="50.00" {...field} />
+                    <Input type="number" placeholder="4000.00" {...field} />
                 </FormControl>
                 <FormMessage />
                 </FormItem>
@@ -106,9 +106,9 @@ export function SellVoucherForm() {
             name="price"
             render={({ field }) => (
                 <FormItem>
-                <FormLabel>Selling Price ($)</FormLabel>
+                <FormLabel>Selling Price (₹)</FormLabel>
                 <FormControl>
-                    <Input type="number" placeholder="45.00" {...field} />
+                    <Input type="number" placeholder="3600.00" {...field} />
                 </FormControl>
                 <FormMessage />
                 </FormItem>

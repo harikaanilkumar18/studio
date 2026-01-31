@@ -25,6 +25,7 @@ export function VoucherList({ vouchers }: VoucherListProps) {
   }, [vouchers, searchTerm]);
 
   const calculateDiscount = (price: number, originalValue: number) => {
+    if (originalValue === 0) return 0;
     return Math.round(((originalValue - price) / originalValue) * 100);
   };
 
@@ -69,8 +70,8 @@ export function VoucherList({ vouchers }: VoucherListProps) {
               </CardContent>
               <CardFooter className="flex justify-between items-center">
                 <div className="flex items-baseline gap-2">
-                    <p className="text-2xl font-bold">${voucher.price.toFixed(2)}</p>
-                    <p className="text-sm text-muted-foreground line-through">${voucher.originalValue.toFixed(2)}</p>
+                    <p className="text-2xl font-bold">₹{voucher.price.toFixed(2)}</p>
+                    <p className="text-sm text-muted-foreground line-through">₹{voucher.originalValue.toFixed(2)}</p>
                 </div>
                 <Button className="bg-accent text-accent-foreground hover:bg-accent/90">
                   <Sparkles className="mr-2 h-4 w-4" /> Buy Now

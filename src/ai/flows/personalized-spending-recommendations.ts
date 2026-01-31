@@ -60,11 +60,11 @@ Example:
 [
   {
     "recommendation": "Reduce eating out by 20% by cooking more meals at home.",
-    "reason": "You spent $500 on restaurants last month, which is higher than average."
+    "reason": "You spent ₹40000 on restaurants last month, which is higher than average."
   },
   {
     "recommendation": "Consider using public transport or cycling for short commutes.",
-    "reason": "You spent $200 on fuel last month."
+    "reason": "You spent ₹16000 on fuel last month."
   }
 ]
 `,
