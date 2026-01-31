@@ -62,25 +62,25 @@ export function CategoryChart({ transactions }: CategoryChartProps) {
       config={chartConfig}
       className="mx-auto aspect-square h-48"
     >
-        <DonutChart
-            data={chartData}
-            category="amount"
-            index="category"
-            valueFormatter={(value) =>
-                `₹${new Intl.NumberFormat("en-IN").format(value)}`
-            }
-            colors={["Shopping", "Food", "Travel", "Bills", "Entertainment", "Other"]}
-            showLabel={true}
-            showAnimation={true}
-            label={
-              <div className="text-center">
-                <p className="text-2xl font-bold">
-                  ₹{totalAmount.toLocaleString("en-IN")}
-                </p>
-                <p className="text-xs text-muted-foreground">Total Spent</p>
-              </div>
-            }
-        />
+      <DonutChart
+          data={chartData}
+          category="amount"
+          index="category"
+          valueFormatter={(value) =>
+              `₹${new Intl.NumberFormat("en-IN").format(value)}`
+          }
+          colors={["Shopping", "Food", "Travel", "Bills", "Entertainment", "Other"]}
+          showLabel={true}
+          showAnimation={true}
+          label={
+            <div className="text-center">
+              <p className="text-2xl font-bold">
+                ₹{totalAmount.toLocaleString("en-IN")}
+              </p>
+              <p className="text-xs text-muted-foreground">Total Spent</p>
+            </div>
+          }
+      />
     </ChartContainer>
   );
 }

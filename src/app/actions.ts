@@ -4,7 +4,14 @@ import { getPersonalizedRecommendations } from "@/ai/flows/personalized-spending
 import { summarizeSpendingHabits } from "@/ai/flows/summarize-spending-habits";
 import { transactions } from "@/lib/data";
 
+function isApiKeySet() {
+  return process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+}
+
 export async function getSummaryAction() {
+  if (!isApiKeySet()) {
+    return { summary: "AI features are disabled. Please set your GEMINI_API_KEY in the .env file." };
+  }
   try {
     const transactionData = transactions
       .map(
@@ -20,6 +27,9 @@ export async function getSummaryAction() {
 }
 
 export async function getRecommendationsAction() {
+  if (!isApiKeySet()) {
+    return { recommendations: [] };
+  }
   try {
     return await getPersonalizedRecommendations({
       transactionHistory: transactions,
