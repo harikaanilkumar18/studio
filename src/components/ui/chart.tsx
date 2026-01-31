@@ -316,6 +316,114 @@ const ChartLegendContent = React.forwardRef<
 )
 ChartLegendContent.displayName = "ChartLegend"
 
+const DonutChart = React.forwardRef<
+  React.ElementRef<typeof RechartsPrimitive.PieChart>,
+  React.ComponentProps<typeof RechartsPrimitive.PieChart> & {
+    data: any[]
+    category: string
+    index: string
+    colors?: string[]
+    valueFormatter?: (value: number) => string
+    label?: React.ReactNode
+    showLabel?: boolean
+    showAnimation?: boolean
+  }
+>(
+  (
+    {
+      data,
+      className,
+      category,
+      index,
+      colors,
+      valueFormatter = (value) => value.toString(),
+      label,
+      showLabel = true,
+      showAnimation = true,
+      ...props
+    },
+    ref
+  ) => {
+    const { config } = useChart()
+    const chartData = React.useMemo(
+      () =>
+        data.map((item) => ({
+          ...item,
+          fill:
+            item.fill ||
+            (colors
+              ? `var(--color-${
+                  colors[data.indexOf(item) % colors.length]
+                })`
+              : "var(--color-primary)"),
+        })),
+      [data, colors]
+    )
+
+    return (
+      <RechartsPrimitive.PieChart ref={ref} className={className} {...props}>
+        <ChartTooltip
+          cursor={false}
+          content={
+            <ChartTooltipContent
+              hideLabel
+              formatter={(value, name) => (
+                <div className="flex min-w-[8rem] items-center gap-2">
+                  <div
+                    className="h-3 w-3 shrink-0 rounded-[2px]"
+                    style={{
+                      backgroundColor:
+                        chartData.find((item) => item[index] === name)
+                          ?.fill || "var(--color-primary)",
+                    }}
+                  />
+                  <div className="flex flex-1 justify-between gap-4">
+                    <span className="text-muted-foreground">{name}</span>
+                    <span className="font-bold">{valueFormatter(value)}</span>
+                  </div>
+                </div>
+              )}
+            />
+          }
+        />
+        <RechartsPrimitive.Pie
+          data={chartData}
+          dataKey={category}
+          nameKey={index}
+          innerRadius="60%"
+          strokeWidth={2}
+          isAnimationActive={showAnimation}
+        >
+          {showLabel && (
+            <RechartsPrimitive.Label
+              position="center"
+              content={({ viewBox }) => {
+                if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                  return (
+                    <foreignObject
+                      x={viewBox.cx - 64}
+                      y={viewBox.cy - 64}
+                      width={128}
+                      height={128}
+                    >
+                      <div className="flex h-full w-full items-center justify-center text-center">
+                        {label}
+                      </div>
+                    </foreignObject>
+                  )
+                }
+                return null
+              }}
+            />
+          )}
+        </RechartsPrimitive.Pie>
+      </RechartsPrimitive.PieChart>
+    )
+  }
+)
+DonutChart.displayName = "DonutChart"
+
+
 // Helper to extract item config from a payload.
 function getPayloadConfigFromPayload(
   config: ChartConfig,
@@ -362,4 +470,5 @@ export {
   ChartLegend,
   ChartLegendContent,
   ChartStyle,
+  DonutChart,
 }
